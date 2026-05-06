@@ -64,7 +64,7 @@ export function AnalyticsChart({ data }: RevenueProps) {
                 }}
                 itemStyle={{ color: "#ffffff", fontWeight: 700, fontSize: 13 }}
                 labelStyle={{ color: "#71717a", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.05em" }}
-                formatter={(v: number) => [`$${v.toLocaleString()}`, "Revenue"]}
+                formatter={(v: any) => [`$${(Number(v) || 0).toLocaleString()}`, "Revenue"]}
               />
               <Bar dataKey="total" radius={[6, 6, 0, 0]}>
                 {data.map((_, i) => (
