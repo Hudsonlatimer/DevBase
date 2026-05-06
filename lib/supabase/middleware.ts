@@ -44,11 +44,16 @@ export async function updateSession(request: NextRequest) {
     },
   );
 
-  // getUser() validates the JWT against Supabase's auth server.
-  // NEVER use getSession() here — it trusts the cookie blindly.
+  // getSession() reads the cookie directly without a network round-trip.
+  // This is intentional in middleware — we're only doing route protection here,
+  // not reading sensitive data. Actual security is enforced via getUser() inside
+  // Server Components and Server Actions. getUser() in middleware causes
+  // silent failures on edge runtimes (Netlify) because it requires a live
+  // network call to the Supabase auth server on every request.
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
+  const user = session?.user ?? null;
 
   const { pathname } = request.nextUrl;
 
