@@ -56,7 +56,7 @@ export async function Dashboard() {
 
   return (
     <div className="flex min-h-svh flex-col bg-[#050505] text-white">
-      <header className="border-b border-zinc-900 bg-black/50 backdrop-blur-md sticky top-0 z-50">
+      <header className="sticky top-0 z-50 border-b border-zinc-900 bg-black">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 sm:px-6 py-4">
           <Link href="/" className="flex items-center gap-2 font-black text-lg tracking-tighter">
             <Code2 className="size-5 text-primary" />
@@ -73,22 +73,22 @@ export async function Dashboard() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 py-6 sm:py-12 pb-24 md:pb-12">
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 pb-24 sm:px-6 sm:py-10 md:pb-12">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-12">
+        <div className="mb-8 flex flex-col justify-between gap-5 sm:mb-10 sm:flex-row sm:items-end">
           <div className="space-y-1 sm:space-y-2">
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight">Overview</h1>
             <p className="text-zinc-500 font-medium text-sm sm:text-lg">
-              Just the facts, {user?.email?.split("@")[0]}.
+              Hey {user?.email?.split("@")[0]}, here is your week.
             </p>
           </div>
-          <Button asChild className="rounded-full bg-white text-black hover:bg-zinc-200 font-bold px-8 h-12 shadow-xl w-full sm:w-auto">
+          <Button asChild className="h-11 w-full rounded-xl bg-white px-6 font-bold text-black hover:bg-zinc-200 sm:w-auto">
             <Link href="/projects/new"><Plus className="mr-2 size-4" /> New Project</Link>
           </Button>
         </div>
 
         {/* Stat Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12">
+        <div className="mb-8 grid grid-cols-2 gap-3 lg:grid-cols-4 sm:mb-10 sm:gap-4">
           <StatCard title="Active Projects" value={activeProjects}           icon={Briefcase}    />
           <StatCard title="Revenue"         value={fmt.format(finance.totalRevenue)} icon={DollarSign}   />
           <StatCard title="Completed"       value={projectCounts.completed}  icon={CheckCircle2} accent="emerald" />
@@ -96,13 +96,13 @@ export async function Dashboard() {
         </div>
 
         {/* Charts row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="mb-6 grid grid-cols-1 gap-4 sm:mb-8 sm:grid-cols-2 sm:gap-5">
           <AnalyticsChart data={monthlyRevenue} />
           <PipelineChart counts={projectCounts} />
         </div>
 
         {/* Main grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 sm:gap-7">
           {/* Left: recent projects */}
           <div className="lg:col-span-2 space-y-6 sm:space-y-8">
             {/* Recent Projects */}
@@ -157,18 +157,18 @@ export async function Dashboard() {
               </div>
               <div className="p-6">
                 <h3 className="font-bold text-base mb-2">Project Estimator</h3>
-                <p className="text-zinc-500 text-xs font-medium mb-6">Calculate the perfect quote for your next gig.</p>
+                <p className="text-zinc-500 text-xs font-medium mb-6">Quick quote helper for new client work.</p>
                 <Button asChild variant="outline" className="w-full rounded-xl border-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-800 font-bold">
                   <Link href="/tools/calculator">Open Estimator</Link>
                 </Button>
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-primary/20 to-zinc-900 border border-zinc-800 rounded-3xl p-8">
+            <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-7">
               <h3 className="font-black text-xl mb-2 italic">Keep it simple.</h3>
-              <p className="text-zinc-400 text-sm font-medium mb-6">Focus on shipping code and getting paid.</p>
-              <Button asChild variant="secondary" className="w-full rounded-xl bg-zinc-800 text-white hover:bg-zinc-700 font-bold">
-                <Link href="/guide">Read Growth Guide</Link>
+              <p className="text-zinc-400 text-sm font-medium mb-6">Build stuff, deliver on time, get paid.</p>
+              <Button asChild variant="secondary" className="w-full rounded-xl bg-zinc-800 font-bold text-white hover:bg-zinc-700">
+                <Link href="/guide">Read Freelance Notes</Link>
               </Button>
             </div>
           </div>
@@ -181,7 +181,7 @@ export async function Dashboard() {
 
 function StatCard({ title, value, icon: Icon, accent }: { title: string; value: string | number; icon: LucideIcon; accent?: "emerald" | "blue" }) {
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-5 sm:p-6 hover:border-zinc-700 transition-colors">
+    <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 transition-colors hover:border-zinc-700 sm:p-5">
       <div className="flex items-center justify-between mb-3">
         <span className="text-zinc-500 font-bold uppercase tracking-widest text-[10px]">{title}</span>
         <Icon className={`size-4 ${accent === "emerald" ? "text-emerald-500" : accent === "blue" ? "text-blue-500" : "text-zinc-600"}`} />

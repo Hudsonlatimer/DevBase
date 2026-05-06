@@ -46,47 +46,47 @@ export default async function GrowthGuidePage() {
             <ArrowLeft className="size-4 group-hover:-translate-x-1 transition-transform" />
             Back to dashboard
           </Link>
-          <h1 className="text-5xl font-black tracking-tight mb-4 leading-tight">The Freelance <br /> Growth Guide</h1>
-          <p className="text-zinc-500 text-xl font-medium max-w-2xl">How to scale from a solo dev to a high-earning agency. No fluff, just the blueprint.</p>
+          <h1 className="text-5xl font-black tracking-tight mb-4 leading-tight">Freelance <br /> Notes</h1>
+          <p className="text-zinc-500 text-xl font-medium max-w-2xl">What worked for me so far while doing solo client dev work.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           <GuideCard 
             icon={Target}
-            title="Focus on Niche"
-            content="Stop being a Full Stack Developer. Be the Next.js Expert for Fintech or SEO Specialist for Dentists. Specificity = Higher Rates."
+            title="Pick a lane"
+            content="It is easier to get work when people know exactly what you do."
           />
           <GuideCard 
             icon={Zap}
-            title="Value-Based Pricing"
-            content="Do not charge for hours. Charge for the value you bring. A $5k project that saves a client $50k/year is a steal. Use the Estimator tool to find your floor."
+            title="Price with confidence"
+            content="Do not undercharge. Start with your minimum, then price based on project impact."
           />
           <GuideCard 
             icon={MessageSquare}
-            title="Always Be Selling"
-            content="Your lead pipeline should never be empty. Even when fully booked, keep 2-3 hours a week for outreach. Upload new leads every Monday."
+            title="Keep outreach steady"
+            content="Even when busy, spend a little time each week getting new leads."
           />
           <GuideCard 
             icon={ShieldCheck}
-            title="Ship Fast, Iterate"
-            content="The best projects are the ones that are live. Do not let perfectionism kill your momentum. Use DevBase to track deadlines and stay accountable."
+            title="Ship, then improve"
+            content="Done and shipped beats perfect and stuck. Keep moving and iterate after launch."
           />
         </div>
 
         <div className="bg-zinc-900 border border-zinc-800 rounded-[40px] p-12 relative overflow-hidden">
           <div className="relative z-10">
-            <h2 className="text-3xl font-black mb-6 italic">The Golden Rule.</h2>
+            <h2 className="text-3xl font-black mb-6 italic">Main rule.</h2>
             <p className="text-zinc-400 text-lg font-medium leading-relaxed mb-8 max-w-2xl">
-              &quot;Your income is a direct reflection of the number of people you help and the difficulty of the problems you solve.&quot;
+              &quot;The more useful problems you solve, the easier it gets to find better clients.&quot;
             </p>
             <div className="flex gap-4">
               <div className="bg-zinc-950 border border-zinc-800 px-6 py-3 rounded-2xl flex items-center gap-3">
                 <DollarSign className="size-5 text-primary" />
-                <span className="font-bold">Solve Hard Problems</span>
+                <span className="font-bold">Solve Real Problems</span>
               </div>
               <div className="bg-zinc-950 border border-zinc-800 px-6 py-3 rounded-2xl flex items-center gap-3">
                 <TrendingUp className="size-5 text-primary" />
-                <span className="font-bold">Automate the Rest</span>
+                <span className="font-bold">Keep a Repeatable Process</span>
               </div>
             </div>
           </div>

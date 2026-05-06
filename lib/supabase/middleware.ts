@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { safeNextPath } from "@/lib/safe-redirect";
 import { env } from "@/lib/env";
 
-const PROTECTED_PREFIXES = ["/dashboard", "/projects", "/finance", "/settings", "/tools"];
+const PROTECTED_PREFIXES = ["/dashboard", "/projects", "/finance", "/settings", "/tools", "/leads"];
 const AUTH_PAGES = ["/login", "/signup"];
 
 /**

@@ -53,9 +53,9 @@ export default async function NewInvoicePage() {
           <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-2xl">
             <DollarSign className="size-6 text-primary" />
           </div>
-          <h1 className="text-3xl font-black tracking-tight">Add Revenue</h1>
+          <h1 className="text-3xl font-black tracking-tight">Add Invoice</h1>
         </div>
-        <p className="text-zinc-500 text-lg mb-8 font-medium">Log your income and track your growth.</p>
+        <p className="text-zinc-500 text-lg mb-8 font-medium">Log payment details so your numbers stay up to date.</p>
 
         <div className="bg-zinc-900 border border-zinc-800 rounded-[32px] p-8 sm:p-10 shadow-2xl">
           <form action={createInvoice} className="space-y-8">
@@ -97,7 +97,7 @@ export default async function NewInvoicePage() {
               <Input name="date" id="date" type="date" className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
             </div>
 
-            <FormSubmitButton label="Log Income" pendingLabel="Saving Invoice..." className="w-full h-14 bg-white text-black hover:bg-zinc-200 text-lg font-black rounded-2xl shadow-xl transition-all active:scale-[0.98]" />
+            <FormSubmitButton label="Save Invoice" pendingLabel="Saving..." className="w-full h-14 bg-white text-black hover:bg-zinc-200 text-lg font-black rounded-2xl shadow-xl transition-all active:scale-[0.98]" />
           </form>
         </div>
       </main>

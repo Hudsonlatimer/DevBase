@@ -46,9 +46,9 @@ export default async function NewProjectPage() {
           <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-2xl">
             <Briefcase className="size-6 text-primary" />
           </div>
-          <h1 className="text-3xl font-black tracking-tight">New Project</h1>
+          <h1 className="text-3xl font-black tracking-tight">Add Project</h1>
         </div>
-        <p className="text-zinc-500 text-lg mb-8 font-medium">Initialize a new build and track your progress.</p>
+        <p className="text-zinc-500 text-lg mb-8 font-medium">Create a project card and start tracking it.</p>
 
         <div className="bg-zinc-900 border border-zinc-800 rounded-[32px] p-8 sm:p-10 shadow-2xl">
           <form action={createProject} className="space-y-8">
@@ -75,7 +75,7 @@ export default async function NewProjectPage() {
               </div>
             </div>
 
-            <FormSubmitButton label="Initialize Project" pendingLabel="Creating Project..." className="w-full h-14 bg-white text-black hover:bg-zinc-200 text-lg font-black rounded-2xl shadow-xl transition-all active:scale-[0.98]" />
+            <FormSubmitButton label="Create Project" pendingLabel="Creating..." className="w-full h-14 bg-white text-black hover:bg-zinc-200 text-lg font-black rounded-2xl shadow-xl transition-all active:scale-[0.98]" />
           </form>
         </div>
       </main>
