@@ -9,7 +9,7 @@ export type AuthState = { error: string } | undefined;
 
 function readNext(formData: FormData): string {
   const raw = formData.get("next");
-  return safeNextPath(typeof raw === "string" ? raw : null) ?? "/leads";
+  return safeNextPath(typeof raw === "string" ? raw : null) ?? "/dashboard";
 }
 
 function parseCredentials(formData: FormData) {

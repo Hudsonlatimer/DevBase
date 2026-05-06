@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { safeNextPath } from "@/lib/safe-redirect";
 
-const PROTECTED_PREFIXES = ["/leads", "/upload"];
+const PROTECTED_PREFIXES = ["/dashboard", "/projects", "/finance", "/settings", "/tools"];
 const AUTH_PAGES = ["/login", "/signup"];
 
 /**
@@ -66,7 +66,7 @@ export async function updateSession(request: NextRequest) {
     const next = safeNextPath(request.nextUrl.searchParams.get("next"));
     const url = request.nextUrl.clone();
     url.search = "";
-    url.pathname = next ?? "/leads";
+    url.pathname = next ?? "/dashboard";
     return NextResponse.redirect(url);
   }
 

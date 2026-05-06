@@ -10,7 +10,7 @@ export const config = {
    * Match all paths *except* static assets and image files.
    *
    * We deliberately do NOT exclude /login and /signup here — the auth-page
-   * redirect (logged-in users bouncing back to /leads) lives in updateSession
+   * redirect (logged-in users bouncing back to /dashboard) lives in updateSession
    * and depends on running there.
    */
   matcher: [

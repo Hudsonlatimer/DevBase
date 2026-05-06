@@ -3,9 +3,9 @@ import { safeNextPath } from "./safe-redirect";
 
 describe("safeNextPath", () => {
   it("returns same-origin paths unchanged", () => {
-    expect(safeNextPath("/leads")).toBe("/leads");
-    expect(safeNextPath("/leads?page=3")).toBe("/leads?page=3");
-    expect(safeNextPath("/leads/abc-123")).toBe("/leads/abc-123");
+    expect(safeNextPath("/dashboard")).toBe("/dashboard");
+    expect(safeNextPath("/dashboard?page=3")).toBe("/dashboard?page=3");
+    expect(safeNextPath("/dashboard/abc-123")).toBe("/dashboard/abc-123");
   });
 
   it("returns null for empty / whitespace input", () => {
@@ -33,8 +33,8 @@ describe("safeNextPath", () => {
   });
 
   it("rejects bare relative paths without leading slash", () => {
-    expect(safeNextPath("leads")).toBeNull();
-    expect(safeNextPath("../leads")).toBeNull();
+    expect(safeNextPath("dashboard")).toBeNull();
+    expect(safeNextPath("../dashboard")).toBeNull();
   });
 
   it("treats non-string input as missing", () => {
