@@ -7,6 +7,17 @@ import { authSchema } from "@/lib/validation/auth";
 
 export type AuthState = { error: string } | undefined;
 
+/**
+ * Always redirects to an absolute URL using the production domain.
+ * Without this, Next.js Server Actions on Netlify resolve relative paths
+ * against the internal Netlify deploy URL (not the custom domain), sending
+ * users to a random deploy-preview link even though their session is valid.
+ */
+function absoluteRedirect(path: string): never {
+  const base = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  redirect(base ? `${base}${path}` : path);
+}
+
 function readNext(formData: FormData): string {
   const raw = formData.get("next");
   return safeNextPath(typeof raw === "string" ? raw : null) ?? "/dashboard";
@@ -40,7 +51,7 @@ export async function login(
     }
     return { error: "Something went wrong. Please try again." };
   }
-  redirect(readNext(formData));
+  absoluteRedirect(readNext(formData));
 }
 
 export async function signup(
@@ -64,15 +75,13 @@ export async function signup(
     }
     return { error: "Something went wrong. Please try again." };
   }
-  redirect(readNext(formData));
+  absoluteRedirect(readNext(formData));
 }
 
 export async function signInWithGoogle() {
   const supabase = await createClient();
-  
-  // Use local URL for dev, or production URL if missing
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://devbasehq.xyz';
-  
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://devbasehq.xyz";
+
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
