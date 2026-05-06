@@ -33,10 +33,22 @@ export async function getActiveProjectsCount(supabase: Supabase): Promise<number
 }
 
 /** Conversion = completed projects ÷ total projects */
-export function computeConversionRate(counts: ProjectCounts): number | null {
+export function computeConversionRate(counts: Record<string, number>): number | null {
+  const hasLeadPipelineKeys = ["sold", "interested", "not_interested", "voicemail", "not_called"].some(
+    (key) => key in counts
+  );
+  const sold = counts.sold ?? counts.completed ?? 0;
+  const contacted = ["sold", "interested", "not_interested", "voicemail"].reduce(
+    (sum, key) => sum + (counts[key] ?? 0),
+    0
+  );
+  if (contacted > 0) {
+    return (sold / contacted) * 100;
+  }
+  if (hasLeadPipelineKeys) return null;
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
   if (total === 0) return null;
-  return (counts.completed / total) * 100;
+  return (sold / total) * 100;
 }
 
 // ─── Revenue (invoices + completed project budgets) ───────────────────────────

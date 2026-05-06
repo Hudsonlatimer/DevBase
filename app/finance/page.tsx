@@ -3,20 +3,22 @@ import {
   Code2, 
   DollarSign, 
   Plus, 
-  Download, 
-  ArrowUpRight, 
   Clock, 
-  CheckCircle2, 
-  FileText,
-  ArrowLeft,
   Calculator
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserNav } from "@/components/dashboard/user-nav";
 import { BottomNav } from "@/components/dashboard/bottom-nav";
 import { createClient } from "@/lib/supabase/server";
 import { getFinanceMetrics, getRecentInvoices } from "@/lib/dashboard/queries";
+
+type Invoice = {
+  id: string;
+  client_name: string;
+  amount: number;
+  status: string;
+  created_at: string;
+};
 
 export default async function FinancePage() {
   const supabase = await createClient();
@@ -108,7 +110,7 @@ export default async function FinancePage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-800">
-                  {recentInvoices.map((inv: any) => (
+                  {(recentInvoices as Invoice[]).map((inv) => (
                     <tr key={inv.id} className="hover:bg-zinc-800/50 transition-colors group">
                       <td className="px-8 py-6 font-bold">{inv.client_name}</td>
                       <td className="px-8 py-6 font-black text-primary">{formatter.format(inv.amount)}</td>

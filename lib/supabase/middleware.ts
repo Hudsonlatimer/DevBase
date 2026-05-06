@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { safeNextPath } from "@/lib/safe-redirect";
+import { env } from "@/lib/env";
 
 const PROTECTED_PREFIXES = ["/dashboard", "/projects", "/finance", "/settings", "/tools"];
 const AUTH_PAGES = ["/login", "/signup"];
@@ -19,8 +20,8 @@ export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    env.NEXT_PUBLIC_SUPABASE_URL,
+    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
         getAll() {

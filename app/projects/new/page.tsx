@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Code2, ArrowLeft, Briefcase, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Code2, ArrowLeft, Briefcase } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { UserNav } from "@/components/dashboard/user-nav";
 import { createClient } from "@/lib/supabase/server";
 import { createProject } from "./actions";
+import { FormSubmitButton } from "@/components/ui/form-submit-button";
 
 export default async function NewProjectPage() {
   const supabase = await createClient();
@@ -55,18 +55,19 @@ export default async function NewProjectPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div className="space-y-3">
                 <Label htmlFor="client_name" className="text-xs font-bold uppercase tracking-widest text-zinc-500">Client Name</Label>
-                <Input name="client_name" id="client_name" placeholder="Stripe" required className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
+                <Input name="client_name" id="client_name" placeholder="Stripe" required minLength={2} maxLength={80} className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
               </div>
               <div className="space-y-3">
                 <Label htmlFor="project_name" className="text-xs font-bold uppercase tracking-widest text-zinc-500">Project Title</Label>
-                <Input name="project_name" id="project_name" placeholder="SaaS Platform" required className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
+                <Input name="project_name" id="project_name" placeholder="SaaS Platform" required minLength={2} maxLength={100} className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div className="space-y-3">
                 <Label htmlFor="budget" className="text-xs font-bold uppercase tracking-widest text-zinc-500">Budget ($)</Label>
-                <Input name="budget" id="budget" type="number" placeholder="5000" className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
+                <Input name="budget" id="budget" type="number" min={0} step="0.01" placeholder="5000" aria-describedby="budget-help" className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
+                <p id="budget-help" className="text-[11px] text-zinc-500 font-medium">Optional. Add your quoted amount for reporting.</p>
               </div>
               <div className="space-y-3">
                 <Label htmlFor="due_date" className="text-xs font-bold uppercase tracking-widest text-zinc-500">Target Deadline</Label>
@@ -74,9 +75,7 @@ export default async function NewProjectPage() {
               </div>
             </div>
 
-            <Button type="submit" className="w-full h-14 bg-white text-black hover:bg-zinc-200 text-lg font-black rounded-2xl shadow-xl transition-all active:scale-[0.98]">
-              Initialize Project
-            </Button>
+            <FormSubmitButton label="Initialize Project" pendingLabel="Creating Project..." className="w-full h-14 bg-white text-black hover:bg-zinc-200 text-lg font-black rounded-2xl shadow-xl transition-all active:scale-[0.98]" />
           </form>
         </div>
       </main>

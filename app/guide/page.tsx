@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { UserNav } from "@/components/dashboard/user-nav";
 import { createClient } from "@/lib/supabase/server";
+import type { LucideIcon } from "lucide-react";
 
 export default async function GrowthGuidePage() {
   const supabase = await createClient();
@@ -53,12 +54,12 @@ export default async function GrowthGuidePage() {
           <GuideCard 
             icon={Target}
             title="Focus on Niche"
-            content="Stop being a 'Full Stack Developer'. Be the 'Next.js Expert for Fintech' or 'SEO Specialist for Dentists'. Specificity = Higher Rates."
+            content="Stop being a Full Stack Developer. Be the Next.js Expert for Fintech or SEO Specialist for Dentists. Specificity = Higher Rates."
           />
           <GuideCard 
             icon={Zap}
             title="Value-Based Pricing"
-            content="Don't charge for hours. Charge for the value you bring. A $5k project that saves a client $50k/year is a steal. Use the Estimator tool to find your floor."
+            content="Do not charge for hours. Charge for the value you bring. A $5k project that saves a client $50k/year is a steal. Use the Estimator tool to find your floor."
           />
           <GuideCard 
             icon={MessageSquare}
@@ -68,7 +69,7 @@ export default async function GrowthGuidePage() {
           <GuideCard 
             icon={ShieldCheck}
             title="Ship Fast, Iterate"
-            content="The best projects are the ones that are live. Don't let perfectionism kill your momentum. Use DevBase to track deadlines and stay accountable."
+            content="The best projects are the ones that are live. Do not let perfectionism kill your momentum. Use DevBase to track deadlines and stay accountable."
           />
         </div>
 
@@ -76,7 +77,7 @@ export default async function GrowthGuidePage() {
           <div className="relative z-10">
             <h2 className="text-3xl font-black mb-6 italic">The Golden Rule.</h2>
             <p className="text-zinc-400 text-lg font-medium leading-relaxed mb-8 max-w-2xl">
-              "Your income is a direct reflection of the number of people you help and the difficulty of the problems you solve."
+              &quot;Your income is a direct reflection of the number of people you help and the difficulty of the problems you solve.&quot;
             </p>
             <div className="flex gap-4">
               <div className="bg-zinc-950 border border-zinc-800 px-6 py-3 rounded-2xl flex items-center gap-3">
@@ -96,7 +97,7 @@ export default async function GrowthGuidePage() {
   );
 }
 
-function GuideCard({ icon: Icon, title, content }: { icon: any, title: string, content: string }) {
+function GuideCard({ icon: Icon, title, content }: { icon: LucideIcon; title: string; content: string }) {
   return (
     <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 hover:border-zinc-700 transition-colors">
       <div className="bg-zinc-950 w-12 h-12 rounded-2xl flex items-center justify-center mb-6 border border-zinc-800">

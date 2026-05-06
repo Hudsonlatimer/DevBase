@@ -10,7 +10,7 @@ export default function NotFound() {
           <p className="text-3xl font-bold tracking-tight">404</p>
           <p className="font-medium">Page not found</p>
           <p className="text-muted-foreground max-w-sm text-sm">
-            The page you're looking for doesn't exist or has moved.
+            The page you&apos;re looking for doesn&apos;t exist or has moved.
           </p>
           <Button asChild className="mt-2">
             <Link href="/">Back to dashboard</Link>

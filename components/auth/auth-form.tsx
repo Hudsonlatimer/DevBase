@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Code2, ArrowRight, Zap, ShieldCheck } from "lucide-react";
 import type { AuthState } from "@/app/(auth)/actions";
-import { motion } from "framer-motion";
+import Image from "next/image";
 
 type Props = {
   mode: "login" | "signup";
@@ -133,13 +133,17 @@ export function AuthForm({ mode, next, action }: Props) {
                   autoComplete={copy.autoComplete}
                   required
                   minLength={8}
+                  aria-describedby="password-help"
                   disabled={pending}
                   className="bg-black/40 border-white/5 h-12 rounded-2xl focus:ring-primary/40 focus:border-primary/40 placeholder:text-zinc-700 font-bold"
                 />
+                <p id="password-help" className="text-[11px] text-zinc-500 font-medium ml-1">
+                  Use at least 8 characters.
+                </p>
               </div>
               
               {state?.error ? (
-                <div className="bg-red-500/5 border border-red-500/20 text-red-400 p-4 rounded-2xl text-xs font-bold flex items-center gap-3">
+                <div role="alert" aria-live="polite" className="bg-red-500/5 border border-red-500/20 text-red-400 p-4 rounded-2xl text-xs font-bold flex items-center gap-3">
                   <ShieldCheck className="size-4 shrink-0" />
                   {state.error}
                 </div>
@@ -182,9 +186,11 @@ export function AuthForm({ mode, next, action }: Props) {
           Powered by
         </span>
         <a href="https://supabase.com" target="_blank" rel="noreferrer" className="group/supa">
-          <img 
+          <Image
             src="/supabase.png" 
             alt="Supabase" 
+            width={200}
+            height={40}
             className="h-10 w-auto transition-all duration-500 group-hover:scale-105"
           />
         </a>

@@ -6,6 +6,7 @@ import { RefreshCw } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { sendTelemetry } from "@/lib/telemetry";
 
 export default function RootError({
   error,
@@ -16,6 +17,12 @@ export default function RootError({
 }) {
   useEffect(() => {
     console.error("[root] render error:", error);
+    void sendTelemetry({
+      level: "error",
+      source: "app.error",
+      message: error.message,
+      meta: { digest: error.digest },
+    });
   }, [error]);
 
   return (

@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Code2, ArrowRight, Briefcase, DollarSign, NotebookPen, Terminal, Zap, Shield, Globe } from "lucide-react";
+import { Code2, Briefcase, DollarSign, NotebookPen, Terminal, Zap, Shield, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import type { LucideIcon } from "lucide-react";
 
 export function LandingPage() {
   return (
@@ -74,9 +75,12 @@ export function LandingPage() {
           >
             <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-[40px] opacity-0 group-hover:opacity-40 transition-opacity duration-1000" />
             <div className="relative rounded-[40px] border border-white/10 bg-zinc-900/50 p-2 sm:p-4 backdrop-blur-sm overflow-hidden shadow-2xl shadow-black">
-              <img
+              <Image
                 src="/dashboard.png"
                 alt="DevBase Dashboard"
+                width={1920}
+                height={1080}
+                priority
                 className="rounded-[32px] w-full h-auto object-cover border border-white/5 shadow-2xl transition-transform duration-700 group-hover:scale-[1.01]"
               />
             </div>
@@ -147,7 +151,7 @@ export function LandingPage() {
   );
 }
 
-function Feature({ icon: Icon, title, description }: { icon: any; title: string; description: string }) {
+function Feature({ icon: Icon, title, description }: { icon: LucideIcon; title: string; description: string }) {
   return (
     <div className="group">
       <div className="bg-zinc-900/50 border border-zinc-800 p-4 rounded-[24px] w-fit mb-6 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all duration-500">

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Settings, LogOut, User } from "lucide-react";
+import { Settings, LogOut } from "lucide-react";
+import type { User } from "@supabase/supabase-js";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/app/auth/actions";
 
-export function UserNav({ user }: { user: any }) {
+export function UserNav({ user }: { user: User | null }) {
   const username = user?.email?.split("@")[0] ?? "User";
   const initials = username.slice(0, 2).toUpperCase();
 

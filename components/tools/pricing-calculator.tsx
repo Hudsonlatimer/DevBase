@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { Calculator, RefreshCw, DollarSign, Clock, Percent } from "lucide-react";
+import { RefreshCw, DollarSign, Clock, Percent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,16 +13,10 @@ export function PricingCalculator() {
   const [contingency, setContingency] = useState<number>(20);
   const [expenses, setExpenses] = useState<number>(0);
   
-  const [total, setTotal] = useState<number>(0);
-  const [profit, setProfit] = useState<number>(0);
-
-  useEffect(() => {
-    const subtotal = hourlyRate * estimatedHours;
-    const contingencyAmount = subtotal * (contingency / 100);
-    const finalPrice = subtotal + contingencyAmount + expenses;
-    setTotal(finalPrice);
-    setProfit(finalPrice - expenses);
-  }, [hourlyRate, estimatedHours, contingency, expenses]);
+  const subtotal = hourlyRate * estimatedHours;
+  const contingencyAmount = subtotal * (contingency / 100);
+  const total = subtotal + contingencyAmount + expenses;
+  const profit = total - expenses;
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',

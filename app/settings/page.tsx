@@ -7,6 +7,7 @@ import { UserNav } from "@/components/dashboard/user-nav";
 import { BottomNav } from "@/components/dashboard/bottom-nav";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { env } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
 
@@ -97,7 +98,7 @@ export default async function SettingsPage() {
             </div>
             <div className="p-6">
               <p className="text-sm text-zinc-500 font-medium mb-4">
-                To change your password, we'll send a reset link to <span className="text-white font-bold">{user.email}</span>.
+                To change your password, we&apos;ll send a reset link to <span className="text-white font-bold">{user.email}</span>.
               </p>
               <PasswordResetButton email={user.email ?? ""} />
             </div>
@@ -163,7 +164,7 @@ function PasswordResetButton({ email }: { email: string }) {
       const { createClient } = await import("@/lib/supabase/server");
       const supabase = await createClient();
       await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/reset-password`,
+        redirectTo: `${env.NEXT_PUBLIC_SITE_URL}/auth/reset-password`,
       });
     }}>
       <Button type="submit" variant="outline" className="border-zinc-700 hover:bg-zinc-800 rounded-xl font-bold text-sm gap-2">

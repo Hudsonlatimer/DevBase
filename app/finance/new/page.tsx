@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { Code2, ArrowLeft, DollarSign, Plus, Calendar, FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Code2, ArrowLeft, DollarSign, Calendar } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { 
@@ -13,6 +12,7 @@ import {
 import { UserNav } from "@/components/dashboard/user-nav";
 import { createClient } from "@/lib/supabase/server";
 import { createInvoice } from "./actions";
+import { FormSubmitButton } from "@/components/ui/form-submit-button";
 
 export default async function NewInvoicePage() {
   const supabase = await createClient();
@@ -61,18 +61,20 @@ export default async function NewInvoicePage() {
           <form action={createInvoice} className="space-y-8">
             <div className="space-y-3">
               <Label htmlFor="client_name" className="text-xs font-bold uppercase tracking-widest text-zinc-500">Client Name</Label>
-              <Input name="client_name" id="client_name" placeholder="Gumroad" required className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
+              <Input name="client_name" id="client_name" placeholder="Gumroad" required minLength={2} maxLength={80} className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
             </div>
 
             <div className="space-y-3">
               <Label htmlFor="description" className="text-xs font-bold uppercase tracking-widest text-zinc-500">Description (What you did)</Label>
-              <Input name="description" id="description" placeholder="Custom landing page build" className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
+              <Input name="description" id="description" placeholder="Custom landing page build" maxLength={150} aria-describedby="description-help" className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
+              <p id="description-help" className="text-[11px] text-zinc-500 font-medium">Optional. Keep this short so invoices stay scannable.</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div className="space-y-3">
                 <Label htmlFor="amount" className="text-xs font-bold uppercase tracking-widest text-zinc-500">Amount ($)</Label>
-                <Input name="amount" id="amount" type="number" placeholder="1500" required className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
+                <Input name="amount" id="amount" type="number" min={1} step="0.01" placeholder="1500" required aria-describedby="amount-help" className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
+                <p id="amount-help" className="text-[11px] text-zinc-500 font-medium">Use gross invoice amount before platform fees.</p>
               </div>
               <div className="space-y-3">
                 <Label htmlFor="status" className="text-xs font-bold uppercase tracking-widest text-zinc-500">Status</Label>
@@ -95,9 +97,7 @@ export default async function NewInvoicePage() {
               <Input name="date" id="date" type="date" className="h-12 bg-zinc-950 border-zinc-800 rounded-xl focus:ring-primary font-bold text-white" />
             </div>
 
-            <Button type="submit" className="w-full h-14 bg-white text-black hover:bg-zinc-200 text-lg font-black rounded-2xl shadow-xl transition-all active:scale-[0.98]">
-              Log Income
-            </Button>
+            <FormSubmitButton label="Log Income" pendingLabel="Saving Invoice..." className="w-full h-14 bg-white text-black hover:bg-zinc-200 text-lg font-black rounded-2xl shadow-xl transition-all active:scale-[0.98]" />
           </form>
         </div>
       </main>

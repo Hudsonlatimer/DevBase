@@ -16,14 +16,14 @@ export async function createProject(formData: FormData) {
   const due_date = formData.get("due_date") as string;
 
   // 1. Create the project
-  const { data: project, error: projectError } = await supabase.from("projects").insert({
+  const { error: projectError } = await supabase.from("projects").insert({
     user_id: user.id,
     client_name,
     project_name,
     budget: budget ? Number(budget) : null,
     due_date: due_date ? new Date(due_date).toISOString() : null,
     status: "development",
-  }).select().single();
+  });
 
   if (projectError) {
     console.error("Error creating project:", projectError);

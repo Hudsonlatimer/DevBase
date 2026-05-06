@@ -4,12 +4,11 @@ import {
   DollarSign,
   Briefcase,
   CheckCircle2,
-  Clock,
   TrendingUp,
   Calculator,
   Plus,
-  ArrowUpRight,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UserNav } from "@/components/dashboard/user-nav";
 import { BottomNav } from "@/components/dashboard/bottom-nav";
@@ -180,7 +179,7 @@ export async function Dashboard() {
   );
 }
 
-function StatCard({ title, value, icon: Icon, accent }: { title: string; value: string | number; icon: any; accent?: "emerald" | "blue" }) {
+function StatCard({ title, value, icon: Icon, accent }: { title: string; value: string | number; icon: LucideIcon; accent?: "emerald" | "blue" }) {
   return (
     <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-5 sm:p-6 hover:border-zinc-700 transition-colors">
       <div className="flex items-center justify-between mb-3">

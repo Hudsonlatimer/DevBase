@@ -24,7 +24,7 @@ export function ProjectActions({ id }: { id: string }) {
       try {
         await deleteProject(id);
         toast.success("Project deleted");
-      } catch (err) {
+      } catch {
         toast.error("Failed to delete project");
       }
     });
@@ -35,7 +35,7 @@ export function ProjectActions({ id }: { id: string }) {
       try {
         await updateProjectStatus(id, status);
         toast.success(`Status updated to ${status}`);
-      } catch (err) {
+      } catch {
         toast.error("Failed to update status");
       }
     });
@@ -45,7 +45,7 @@ export function ProjectActions({ id }: { id: string }) {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-600 hover:text-white" disabled={isPending}>
+          <Button variant="ghost" size="icon" aria-label="Open project actions" className="h-8 w-8 text-zinc-600 hover:text-white" disabled={isPending}>
             <MoreVertical className="size-4" />
           </Button>
         </DropdownMenuTrigger>

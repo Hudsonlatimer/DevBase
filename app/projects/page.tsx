@@ -25,6 +25,16 @@ const STATUS_BADGE: Record<string, string> = {
   on_hold:     "border-zinc-700 text-zinc-500 bg-zinc-800",
 };
 
+type Project = {
+  id: string;
+  project_name: string;
+  client_name: string;
+  status: string;
+  due_date: string | null;
+  budget: number | null;
+  notes: string | null;
+};
+
 export default async function ProjectsPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -72,7 +82,7 @@ export default async function ProjectsPage() {
 
         {projects && projects.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {projects.map((p: any) => (
+            {(projects as Project[]).map((p) => (
               <div key={p.id} className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-zinc-700 transition-colors relative overflow-hidden flex flex-col">
                 {/* Status accent bar */}
                 <div className={`absolute top-0 left-0 h-0.5 w-full ${STATUS_COLOR[p.status] ?? "bg-zinc-700"}`} />

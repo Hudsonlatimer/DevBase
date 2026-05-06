@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { safeNextPath } from "@/lib/safe-redirect";
 import { authSchema } from "@/lib/validation/auth";
+import { env } from "@/lib/env";
 
 export type AuthState = { error: string } | undefined;
 
@@ -14,8 +15,8 @@ export type AuthState = { error: string } | undefined;
  * users to a random deploy-preview link even though their session is valid.
  */
 function absoluteRedirect(path: string): never {
-  const base = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
-  redirect(base ? `${base}${path}` : path);
+  const base = env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
+  redirect(`${base}${path}`);
 }
 
 function readNext(formData: FormData): string {
@@ -80,7 +81,7 @@ export async function signup(
 
 export async function signInWithGoogle() {
   const supabase = await createClient();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://devbasehq.xyz";
+  const siteUrl = env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
@@ -89,7 +90,12 @@ export async function signInWithGoogle() {
     },
   });
 
+  if (error) {
+    console.error("[google-oauth] Supabase error:", error);
+    absoluteRedirect("/login");
+  }
   if (data.url) {
     redirect(data.url);
   }
+  absoluteRedirect("/login");
 }
