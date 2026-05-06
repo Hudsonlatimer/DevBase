@@ -11,18 +11,16 @@ export async function createInvoice(formData: FormData) {
   if (!user) throw new Error("Unauthorized");
 
   const client_name = formData.get("client_name") as string;
-  const description = formData.get("description") as string;
   const amount = formData.get("amount") as string;
   const status = formData.get("status") as string;
-  const created_at = formData.get("date") as string;
+  const issue_date = formData.get("date") as string;
 
   const { error } = await supabase.from("invoices").insert({
     user_id: user.id,
     client_name,
-    description,
     amount: Number(amount),
     status: status || "sent",
-    created_at: created_at ? new Date(created_at).toISOString() : new Date().toISOString(),
+    issue_date: issue_date || null,
   });
 
   if (error) {
